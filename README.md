@@ -8,7 +8,7 @@ A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Cl
 
 - **User Management**: Get user information and authentication status
 - **Space Management**: List and search documentation spaces
-- **Document Search**: Search within specific documentation spaces using Typesense
+- **Document Search**: Search within specific documentation spaces
 - **Code Generation**: Generate documentation, tests, and optimizations for source code
 - **Multi-File Documentation**: Generate comprehensive documentation for multiple source files with token validation
 - **Complete CRUD Operations**: Create, read, update, and delete documents in spaces
@@ -122,8 +122,6 @@ Generate comprehensive documentation for source code files.
 
 **Features**:
 - **Multi-File Support**: Process multiple files in a single request
-- **Token Validation**: Automatic validation to ensure code fits within model limits
-- **Modern AI**: Uses OpenAI Responses API for enhanced generation
 - **Smart Context**: Analyzes relationships between files for comprehensive documentation
 
 **Example (Single File)**:
@@ -248,15 +246,11 @@ Generate documentation using DocuWriter.ai AI and automatically add it to a spac
 - `parent_id` (string, optional): The ID of the parent folder
 - `path` (string, optional): Folder path for the document
 
-**Progress Updates**: This tool provides real-time status updates:
-- 🚀 Starting documentation generation
-- ✅ Documentation generated successfully
-- 📝 Adding generated documentation to space
-- 🎉 Documentation successfully generated and added to space!
+**Workflow**: This tool handles the complete process from generation to space addition automatically.
 
 **Example**:
 ```
-Generate documentation for my API code and add it to my project space with progress updates
+Generate documentation for my API code and add it to my project space
 ```
 
 ## Getting Your API Token
