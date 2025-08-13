@@ -17,7 +17,7 @@ A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Cl
 
 ### From npm
 ```bash
-npm install -g @docuwriter/mcp-client
+npm install -g @docuwriter-ai/mcp-client
 ```
 
 ### From source
@@ -27,6 +27,21 @@ cd mcp-client
 npm install
 npm link
 ```
+
+### Quick Install
+
+**Add DocuWriter.ai MCP server to Cursor with one click:**
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.png)](cursor://anysphere.cursor-deeplink/mcp/install?name=docuwriter&config=eyJjb21tYW5kIjoibnB4IC15IEBkb2N1d3JpdGVyLWFpL21jcC1jbGllbnQiLCJlbnYiOnsiRE9DVVdSSVRFUl9BUElfVE9LRU4iOiJ7SU5TRVJUX1lPVVJfRE9DVVdSSVRFUl9BUElfVE9LRU5fSEVSRX0ifX0=)
+
+
+### Getting Your API Token
+
+1. Log into your [DocuWriter.ai account](https://www.docuwriter.ai)
+2. Go to your profile/settings
+3. Navigate to API tokens section
+4. Create a new token or copy an existing one
+5. When installing the MCP server, Cursor will automatically prompt you to enter your API token in the Environment Variables section
 
 ## Configuration
 
@@ -41,7 +56,7 @@ npm link
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter/mcp-client"],
+      "args": ["-y", "@docuwriter-ai/mcp-client"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -57,7 +72,7 @@ npm link
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter/mcp-client"],
+      "args": ["-y", "@docuwriter-ai/mcp-client"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -253,13 +268,7 @@ Generate documentation using DocuWriter.ai AI and automatically add it to a spac
 Generate documentation for my API code and add it to my project space
 ```
 
-## Getting Your API Token
 
-1. Log into your DocuWriter.ai account
-2. Go to your profile/settings
-3. Navigate to API tokens section
-4. Create a new token or copy an existing one
-5. Use this token as your `DOCUWRITER_API_TOKEN`
 
 ## Troubleshooting
 
