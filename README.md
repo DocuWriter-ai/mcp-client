@@ -30,9 +30,9 @@ npm link
 
 ### Quick Install
 
-**Add DocuWriter.ai MCP server to Cursor with one click:**
+**Add DocuWriter.ai MCP server to Cursor:**
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.png)](cursor://anysphere.cursor-deeplink/mcp/install?name=docuwriter&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBkb2N1d3JpdGVyLWFpL21jcC1jbGllbnQiXSwiZW52Ijp7IkRPQ1VXUklURVJfQVBJX1RPS0VOIjoie0lOU0VSVF9ZT1VSX0RPQ1VXUklURVJfQVBJX1RPS0VOX0hFUkV9In19)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=DocuWriter.ai&config=eyJjb21tYW5kIjoibnB4IC15IEBkb2N1d3JpdGVyLWFpL21jcC1jbGllbnQiLCJlbnYiOnsiRE9DVVdSSVRFUl9BUElfVE9LRU4iOiJ5b3VyX3Rva2VuX2hlcmUifX0%3D)
 
 
 ### Getting Your API Token
