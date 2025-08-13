@@ -11,6 +11,7 @@ import {
     generateCodeDocumentation,
     generateCodeTests,
     generateCodeOptimization,
+    generateCodeComments,
     createSpaceDocument,
     getSpaceDocument,
     updateSpaceDocument,
@@ -96,8 +97,8 @@ class DocuWriterMCPClient {
             inputSchema: {
                 source_code: z.string().describe('The source code to generate tests for'),
                 filename: z.string().describe('Name of the file being tested'),
-                test_type: z.string().default('Unit').describe('Type of tests to generate').optional(),
-                test_framework: z.string().describe('Testing framework to use').optional(),
+                test_type: z.string().default('unit tests').describe('Type of tests to generate (e.g., "unit tests", "integration tests")').optional(),
+                test_framework: z.string().default('auto-detect').describe('Testing framework to use (e.g., "Jest", "PHPUnit", "JUnit") or "auto-detect"').optional(),
                 additional_instructions: z.string().describe('Additional instructions for test generation').optional(),
                 name: z.string().describe('Optional custom name for the generated tests for better searchability').optional()
             }
@@ -120,6 +121,20 @@ class DocuWriterMCPClient {
         }, async (args) => {
             await this.ensureApiClient();
             return generateCodeOptimization(this.apiClient, args);
+        });
+
+        // Register generate_code_comments tool
+        this.server.registerTool('generate_code_comments', {
+            title: 'Generate Code Comments',
+            description: 'Generate DocBlock comments for source code',
+            inputSchema: {
+                source_code: z.string().describe('The source code to add comments to'),
+                filename: z.string().describe('Name of the file being commented'),
+                name: z.string().describe('Optional custom name for the commented code for better searchability').optional()
+            }
+        }, async (args) => {
+            await this.ensureApiClient();
+            return generateCodeComments(this.apiClient, args);
         });
 
         // Register create_space_document tool

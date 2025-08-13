@@ -510,7 +510,7 @@ export async function generateCodeDocumentation(apiClient, args) {
  */
 export async function generateCodeTests(apiClient, args) {
     try {
-        const { source_code, filename, test_type = 'Unit', test_framework, additional_instructions, name } = args;
+        const { source_code, filename, test_type = 'unit tests', test_framework = 'auto-detect', additional_instructions, name } = args;
 
         // Validate required arguments
         if (!source_code || typeof source_code !== 'string') {
@@ -567,6 +567,46 @@ export async function generateCodeOptimization(apiClient, args) {
         const result = await apiClient.generateCodeOptimization(source_code, filename, {
             optimization_focus,
             additional_instructions,
+            name
+        });
+
+        return {
+            content: [{
+                type: 'text',
+                text: JSON.stringify(result, null, 2)
+            }]
+        };
+    } catch (error) {
+        return {
+            content: [{
+                type: 'text',
+                text: JSON.stringify({
+                    success: false,
+                    error: error.message,
+                    status: error.status || 'unknown'
+                }, null, 2)
+            }]
+        };
+    }
+}
+
+/**
+ * Generate code comments
+ */
+export async function generateCodeComments(apiClient, args) {
+    try {
+        const { source_code, filename, name } = args;
+
+        // Validate required arguments
+        if (!source_code || typeof source_code !== 'string') {
+            throw new Error('source_code is required and must be a string');
+        }
+
+        if (!filename || typeof filename !== 'string') {
+            throw new Error('filename is required and must be a string');
+        }
+
+        const result = await apiClient.generateCodeComments(source_code, filename, {
             name
         });
 

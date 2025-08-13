@@ -223,8 +223,8 @@ export class DocuWriterAPIClient {
      */
     async generateCodeTests(sourceCode, filename, options = {}) {
         const {
-            test_type = 'Unit',
-            test_framework = 'PHPUnit',
+            test_type = 'unit tests',
+            test_framework = 'auto-detect',
             additional_instructions = '',
             name = ''
         } = options;
@@ -232,9 +232,8 @@ export class DocuWriterAPIClient {
         const payload = {
             source_code: sourceCode,
             filename,
-            test_type,
             test_framework,
-            additional_instructions
+            test_type
         };
 
         // Add name if provided
@@ -268,5 +267,26 @@ export class DocuWriterAPIClient {
         }
 
         return this.request('POST', '/generate-code-optimization', payload);
+    }
+
+    /**
+     * Generate code comments
+     */
+    async generateCodeComments(sourceCode, filename, options = {}) {
+        const {
+            name = ''
+        } = options;
+
+        const payload = {
+            source_code: sourceCode,
+            filename
+        };
+
+        // Add name if provided
+        if (name) {
+            payload.name = name;
+        }
+
+        return this.request('POST', '/generate-code-comments', payload);
     }
 }
