@@ -1,6 +1,6 @@
 {
   "name": "@docuwriter-ai/mcp-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP client for DocuWriter.ai - enables AI assistants to generate documentation and search documentation spaces",
   "type": "module",
   "main": "src/index.js",
@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/docuwriter/mcp-client.git"
+    "url": "git+https://github.com/DocuWriter-ai/mcp-client.git"
   },
   "homepage": "https://www.docuwriter.ai",
   "bugs": {
-    "url": "https://github.com/docuwriter/mcp-client/issues"
+    "url": "https://github.com/DocuWriter-ai/mcp-client/issues"
   }
 }
