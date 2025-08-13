@@ -122,6 +122,8 @@ Search for "authentication" in space 123
 
 ### Code Generation Tools
 
+> **⚠️ Processing time notice**: All generation tools use advanced AI models and typically take time to complete, depending on code complexity and file size. Please be patient during processing.
+
 #### `generate_code_documentation` ⭐ **Multi-File Support**
 Generate comprehensive documentation for source code files.
 
@@ -263,12 +265,46 @@ Generate documentation using DocuWriter.ai AI and automatically add it to a spac
 
 **Workflow**: This tool handles the complete process from generation to space addition automatically.
 
+**Processing Time**: 30 seconds to 2 minutes depending on code complexity
+
 **Example**:
 ```
 Generate documentation for my API code and add it to my project space
 ```
 
+## Processing Times & Best Practices
 
+### Generation Tool Performance
+
+All DocuWriter.ai generation tools use advanced AI models to analyze and process your code. Here's what to expect:
+
+| Tool | Typical Processing Time | Factors Affecting Speed |
+|------|------------------------|------------------------|
+| **Code Documentation** | 30 sec - 2 min | File size, code complexity, number of files |
+| **Test Generation** | 30 sec - 2 min | Code complexity, test coverage requirements |
+| **Code Optimization** | 30 sec - 2 min | Code size, optimization focus (performance/readability) |
+| **Language Conversion** | 30 sec - 2 min | Source language, target language, code complexity |
+
+### Best Practices for Faster Processing
+
+1. **Optimize File Size**: Keep individual files under 500KB for best performance
+2. **Use Multi-File Support**: For related files, use the multi-file documentation tool instead of separate requests
+3. **Provide Clear Instructions**: Specific additional instructions help the AI work more efficiently
+4. **Batch Similar Requests**: Group related generation tasks together
+
+### What Happens During Processing
+
+- **Code Analysis**: AI analyzes your code structure, dependencies, and patterns
+- **Context Understanding**: Builds comprehensive understanding of your codebase
+- **Generation**: Creates high-quality, contextual output based on analysis
+- **Quality Assurance**: Ensures output meets your specified requirements
+
+### Handling Long Processing Times
+
+- **Don't Interrupt**: Let the process complete to avoid partial results
+- **Check File Size**: Large files (>1MB) may take longer to process
+- **Monitor Progress**: The MCP client will show progress updates during generation
+- **Contact Support**: If processing consistently takes >3 minutes, contact support
 
 ## Troubleshooting
 
