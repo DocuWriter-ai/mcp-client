@@ -1,5 +1,7 @@
 # DocuWriter.ai MCP Client
 
+![DocuWriter.ai Logo](https://www.docuwriter.ai/assets/logo-horizontal.png)
+
 A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Claude, and ChatGPT to interact with DocuWriter.ai for documentation generation and space management.
 
 ## Features
