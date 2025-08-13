@@ -200,11 +200,13 @@ class DocuWriterMCPClient {
         // Register generate_and_add_documentation tool
         this.server.registerTool('generate_and_add_documentation', {
             title: 'Generate and Add Documentation',
-            description: 'Generate documentation using DocuWriter.ai AI and automatically add it to a space with progress updates',
+            description: 'Generate documentation using DocuWriter.ai AI and automatically add it to a space',
             inputSchema: {
                 space_id: z.string().describe('The ID of the space to add the documentation to'),
-                source_code: z.string().describe('The source code to document'),
-                filename: z.string().describe('Name of the file being documented'),
+                files: z.array(z.object({
+                    filename: z.string().describe('Name of the file'),
+                    source_code: z.string().describe('Source code content of the file')
+                })).describe('Array of files to document (can be a single file or multiple files)'),
                 title: z.string().describe('Title for the document in the space'),
                 output_language: z.string().describe('Output language for documentation').optional(),
                 documentation_type: z.string().describe('Type of documentation to generate').optional(),

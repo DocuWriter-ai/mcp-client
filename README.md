@@ -248,14 +248,14 @@ Delete a document from a space.
 ### Advanced Workflow Tools
 
 #### `generate_and_add_documentation` ⭐ **Recommended Workflow**
-Generate documentation using DocuWriter.ai AI and automatically add it to a space with progress updates.
+Generate documentation using DocuWriter.ai AI and automatically add it to a space.
 
 **Parameters**:
 - `space_id` (string, required): The ID of the space to add the documentation to
-- `source_code` (string, required): The source code to document
-- `filename` (string, required): Name of the file being documented
+- `files` (array, required): Array of file objects, each containing:
+  - `filename` (string, required): Name of the file
+  - `source_code` (string, required): Source code content of the file
 - `title` (string, required): Title for the document in the space
-
 - `output_language` (string, optional): Output language for documentation
 - `documentation_type` (string, optional): Type of documentation to generate
 - `additional_instructions` (string, optional): Additional instructions for documentation generation
@@ -265,11 +265,22 @@ Generate documentation using DocuWriter.ai AI and automatically add it to a spac
 
 **Workflow**: This tool handles the complete process from generation to space addition automatically.
 
-**Processing Time**: 30 seconds to 2 minutes depending on code complexity
-
-**Example**:
+**Example (Single File)**:
 ```
-Generate documentation for my API code and add it to my project space
+Generate documentation for my API code and add it to my project space:
+files: [{"filename": "UserController.php", "source_code": "[paste your code here]"}]
+title: User Controller Documentation
+```
+
+**Example (Multiple Files)**:
+```
+Generate documentation for my API and add it to my project space:
+files: [
+  {"filename": "UserController.php", "source_code": "[controller code]"},
+  {"filename": "UserModel.php", "source_code": "[model code]"},
+  {"filename": "UserService.php", "source_code": "[service code]"}
+]
+title: User API Documentation
 ```
 
 ## Processing Times & Best Practices

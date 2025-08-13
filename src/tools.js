@@ -361,8 +361,7 @@ export async function generateAndAddDocumentation(apiClient, args) {
     try {
         const {
             space_id,
-            source_code,
-            filename,
+            files,
             title,
             output_language,
             documentation_type,
@@ -377,22 +376,26 @@ export async function generateAndAddDocumentation(apiClient, args) {
             throw new Error('space_id is required');
         }
 
-        if (!source_code || typeof source_code !== 'string') {
-            throw new Error('source_code is required and must be a string');
-        }
-
-        if (!filename || typeof filename !== 'string') {
-            throw new Error('filename is required and must be a string');
+        if (!files || !Array.isArray(files) || files.length === 0) {
+            throw new Error('files array is required and must contain at least one file');
         }
 
         if (!title || typeof title !== 'string') {
             throw new Error('title is required and must be a string');
         }
 
-        // Generate documentation
-        const generationResult = await apiClient.generateCodeDocumentation(source_code, filename, {
-            output_language,
-            documentation_type,
+        // Validate all files have required properties
+        for (const file of files) {
+            if (!file.filename || !file.source_code) {
+                throw new Error('All files must have both filename and source_code properties');
+            }
+        }
+
+        // Generate documentation using the multi-file endpoint
+        const generationResult = await apiClient.request('POST', '/generate-multi-file-documentation', {
+            files,
+            output_documentation_type: documentation_type,
+            language: output_language,
             additional_instructions,
             name: name || title
         });
@@ -400,7 +403,7 @@ export async function generateAndAddDocumentation(apiClient, args) {
         // Add to space
         const spaceResult = await apiClient.createSpaceDocument(space_id, {
             title: title.trim(),
-            content: generationResult.data?.content || generationResult.data?.markdown || 'Documentation generation completed successfully.',
+            content: generationResult.data?.generation || generationResult.data?.content || generationResult.data?.markdown || 'Documentation generation completed successfully.',
             type: 'markdown',
             parent_id,
             path
@@ -432,7 +435,7 @@ export async function generateAndAddDocumentation(apiClient, args) {
                     success: false,
                     error: error.message,
                     status: error.status || 'unknown',
-                    hint: 'Check that the space exists, you have write permissions, and the source code is valid'
+                    hint: 'Check that the space exists, you have write permissions, and the files are valid'
                 }, null, 2)
             }]
         };
@@ -629,3 +632,4 @@ export async function generateCodeComments(apiClient, args) {
         };
     }
 }
+
