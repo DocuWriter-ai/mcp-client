@@ -10,18 +10,17 @@ A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Cl
 - **Code Generation**: Generate documentation, tests, and optimizations for source code
 - **Multi-File Documentation**: Generate comprehensive documentation for multiple source files with token validation
 - **Complete CRUD Operations**: Create, read, update, and delete documents in spaces
-- **Modern AI Integration**: Uses OpenAI Responses API for enhanced generation capabilities
 
 ## Installation
 
-### From npm (coming soon)
+### From npm
 ```bash
 npm install -g @docuwriter/mcp-client
 ```
 
 ### From source
 ```bash
-git clone https://github.com/docuwriter/mcp-client.git
+git clone https://github.com/DocuWriter-ai/mcp-client.git
 cd mcp-client
 npm install
 npm link
@@ -32,14 +31,9 @@ npm link
 ### Environment Variables
 
 - `DOCUWRITER_API_TOKEN` (required): Your DocuWriter.ai API token
-- `DOCUWRITER_API_URL` (optional): API base URL 
-  - **Production**: `https://app.docuwriter.ai/api` (default)
-  - **Local development**: `https://docs-ai.test/api`
-- `NODE_TLS_REJECT_UNAUTHORIZED` (optional): Set to "0" for local development SSL issues
 
 ### Cursor Configuration
 
-#### Production (default)
 ```json
 {
   "mcpServers": {
@@ -48,23 +42,6 @@ npm link
       "args": ["-y", "@docuwriter/mcp-client"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
-      }
-    }
-  }
-}
-```
-
-#### Local Development
-```json
-{
-  "mcpServers": {
-    "docuwriter-local": {
-      "command": "npx",
-      "args": ["-y", "@docuwriter/mcp-client"],
-      "env": {
-        "DOCUWRITER_API_TOKEN": "your_local_token_here",
-        "DOCUWRITER_API_URL": "https://docs-ai.test/api",
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
       }
     }
   }
@@ -73,7 +50,6 @@ npm link
 
 ### Claude Desktop Configuration
 
-#### Production (default)
 ```json
 {
   "mcpServers": {
@@ -82,23 +58,6 @@ npm link
       "args": ["-y", "@docuwriter/mcp-client"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
-      }
-    }
-  }
-}
-```
-
-#### Local Development
-```json
-{
-  "mcpServers": {
-    "docuwriter-local": {
-      "command": "npx",
-      "args": ["-y", "@docuwriter/mcp-client"],
-      "env": {
-        "DOCUWRITER_API_TOKEN": "your_local_token_here",
-        "DOCUWRITER_API_URL": "https://docs-ai.test/api",
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
       }
     }
   }
@@ -313,68 +272,16 @@ Generate documentation for my API code and add it to my project space with progr
 - Check that your token has the necessary permissions
 - Ensure you're not hitting rate limits
 
-### SSL Certificate Issues (Local Development)
-- **Problem**: "unable to verify the first certificate" errors with local development URLs
-- **Solution**: The MCP client automatically handles self-signed certificates for local development
-- **Supported URLs**: `docs-ai.test`, `localhost`, `127.0.0.1`
-- **Note**: Production URLs (`app.docuwriter.ai`) use proper SSL certificates
-
-### Multi-File Documentation Issues
-- **Token Limit**: If you get "code is too large" errors, reduce the number of files or code size
-- **File Format**: Ensure each file object has both `filename` and `source_code` properties
-- **Array Format**: Always use the `files` array format, even for single files
-
-### Search Issues
-- Make sure the space ID exists and you have access to it
-- Search queries must be at least 2 characters long
-- Check that the space contains searchable content
-
-### Connection Issues
-- Verify your internet connection
-- Check if DocuWriter.ai is accessible
-- Try with a different AI assistant to isolate the issue
-
-## Development
-
-### Running Locally
-```bash
-# Set your API token
-export DOCUWRITER_API_TOKEN="your_token_here"
-
-# Run the MCP client
-npm start
-```
 
 ### Testing with MCP Inspector
 ```bash
 npx @modelcontextprotocol/inspector src/index.js
 ```
 
-## Technical Details
-
-### OpenAI Responses API Integration
-The MCP client uses the modern OpenAI Responses API (`/v1/responses`) for enhanced generation capabilities:
-- **Better Reasoning**: Supports advanced reasoning models like o4-mini
-- **Improved Context**: Better handling of complex multi-file scenarios
-- **Enhanced Quality**: Superior documentation generation with better understanding of code relationships
-
-### Token Validation
-Multi-file documentation generation includes automatic token validation:
-- **Accurate Counting**: Uses tiktoken library for precise token calculation
-- **Model Limits**: Respects different token limits for different models
-- **Safety Buffer**: Includes 20% buffer for response tokens
-- **User-Friendly Errors**: Clear messages without exposing technical details
-
-### Content Conversion
-The MCP client handles seamless content conversion between formats:
-- **Markdown ↔ Editor.js**: Automatic conversion for space documents
-- **Consistent Storage**: Proper Editor.js format storage in database
-- **Compatible Display**: Works seamlessly with DocuWriter.ai interface
-
 ## Support
 
 - **Documentation**: [DocuWriter.ai Docs](https://www.docuwriter.ai/docs)
-- **Issues**: [GitHub Issues](https://github.com/docuwriter/mcp-client/issues)
+- **Issues**: [GitHub Issues](https://github.com/DocuWriter-ai/mcp-client/issues)
 - **Support**: [DocuWriter.ai Support](https://www.docuwriter.ai/support)
 
 ## License
