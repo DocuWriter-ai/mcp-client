@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "docuwriter": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@docuwriter/mcp-client"
+            ],
+            "env": {
+                "DOCUWRITER_API_TOKEN": "your_api_token_here"
+            }
+        }
+    }
+}
