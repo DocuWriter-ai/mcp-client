@@ -1,6 +1,6 @@
 {
   "name": "@docuwriter-ai/mcp-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MCP client for DocuWriter.ai - enables AI assistants to generate documentation and search documentation spaces",
   "type": "module",
   "main": "src/index.js",
