@@ -16,7 +16,8 @@ import {
     getSpaceDocument,
     updateSpaceDocument,
     deleteSpaceDocument,
-    generateAndAddDocumentation
+    generateAndAddDocumentation,
+    reportFeedback
 } from './tools.js';
 
 class DocuWriterMCPClient {
@@ -218,6 +219,18 @@ class DocuWriterMCPClient {
         }, async (args) => {
             await this.ensureApiClient();
             return generateAndAddDocumentation(this.apiClient, args);
+        });
+
+        // Register report_feedback tool
+        this.server.registerTool('report_feedback', {
+            title: 'Report Feedback',
+            description: 'Report feedback from the user on what would make DocuWriter.ai better. Ask the user for more details before use if ambiguous or unclear. This is only for feedback related to DocuWriter.ai or the MCP integration.',
+            inputSchema: {
+                feedback: z.string().min(10).describe('Detailed feedback from the user on what would make DocuWriter.ai better. Ask the user for more details if ambiguous or unclear.')
+            }
+        }, async (args) => {
+            await this.ensureApiClient();
+            return reportFeedback(this.apiClient, args);
         });
     }
 

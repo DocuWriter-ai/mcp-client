@@ -167,6 +167,17 @@ Get current user information from DocuWriter.ai.
 Use get_user_info to check my account status
 ```
 
+#### `report_feedback`
+Report feedback from the user on what would make DocuWriter.ai better.
+
+**Parameters**:
+- `feedback` (string, required): Detailed feedback from the user on what would make DocuWriter.ai better (minimum 10 characters)
+
+**Example**:
+```
+Report feedback: "The MCP integration is great but I'd love to see support for more IDEs"
+```
+
 #### `list_spaces`
 List all documentation spaces for the authenticated user.
 

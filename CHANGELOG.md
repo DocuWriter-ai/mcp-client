@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `npx @docuwriter-ai/mcp-client install [cursor|claude|vscode|all]`
   - `npx @docuwriter-ai/mcp-client start` for MCP server
   - Built-in help and usage information
+- **💬 Feedback System**: New `report_feedback` tool for user feedback collection
+  - Collects detailed feedback on DocuWriter.ai improvements
+  - Validates feedback length and content
+  - Logs feedback for review and analysis
 
 ### Changed
 - **📦 Package Structure**: Updated to use CLI as main entry point

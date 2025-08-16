@@ -3,6 +3,50 @@
  */
 
 /**
+ * Report feedback from the user on what would make DocuWriter.ai better
+ */
+export async function reportFeedback(apiClient, args) {
+    try {
+        const { feedback } = args;
+
+        // Validate feedback
+        if (!feedback || typeof feedback !== 'string') {
+            throw new Error('feedback is required and must be a string');
+        }
+
+        if (feedback.trim().length < 10) {
+            throw new Error('feedback must be at least 10 characters long');
+        }
+
+        // Send feedback to DocuWriter.ai API
+        const response = await apiClient.reportFeedback(feedback.trim());
+
+        return {
+            content: [{
+                type: 'text',
+                text: JSON.stringify({
+                    success: true,
+                    message: 'Feedback shared, thank you for helping DocuWriter.ai get better!',
+                    data: response.data || response
+                }, null, 2)
+            }]
+        };
+    } catch (error) {
+        return {
+            content: [{
+                type: 'text',
+                text: JSON.stringify({
+                    success: false,
+                    error: error.message,
+                    status: error.status || 'unknown',
+                    hint: 'Please try again or contact support if the issue persists'
+                }, null, 2)
+            }]
+        };
+    }
+}
+
+/**
  * Get current user information
  */
 export async function getUserInfo(apiClient, args) {

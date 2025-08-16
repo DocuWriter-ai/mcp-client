@@ -289,4 +289,13 @@ export class DocuWriterAPIClient {
 
         return this.request('POST', '/generate-code-comments', payload);
     }
+
+    /**
+     * Report feedback from the user
+     */
+    async reportFeedback(feedback) {
+        return this.request('POST', '/feedback', {
+            feedback: feedback
+        });
+    }
 }
