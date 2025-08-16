@@ -46,7 +46,7 @@ export class DocuWriterAPIClient {
                 'Authorization': `Bearer ${this.token}`,
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'User-Agent': '@docuwriter/mcp-client/1.0.0'
+                'User-Agent': '@docuwriter/mcp-client'
             },
             timeout: this.timeout
         };
