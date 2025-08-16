@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.3] - 2025-01-16
+
+### Updated
+- **📚 Cursor Rules**: Updated Cursor and Claude AI rules to include the new feedback tool
+- **🔄 Auto-Update Documentation**: Updated rules to reflect the new `@latest` auto-update mechanism
+- **💬 Feedback Integration**: Added comprehensive feedback collection guidelines and workflows
+- **🎯 Best Practices**: Enhanced AI assistant guidance for when and how to use the feedback tool
+
 ## [1.2.2] - 2025-01-16
 
 ### Fixed
