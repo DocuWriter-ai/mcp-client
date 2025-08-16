@@ -24,6 +24,7 @@ Use DocuWriter.ai MCP tools when users request:
 - "Create API documentation"
 - "Store this in my docs space"
 - "Search my documentation"
+- "Report feedback" or express suggestions for DocuWriter.ai improvements
 
 ## Available Tools Overview
 
@@ -44,6 +45,7 @@ Use DocuWriter.ai MCP tools when users request:
 ### Workflow Tools
 - `generate_and_add_documentation` - Generate docs and save to space (with progress)
 - `get_user_info` - Get current user information
+- `report_feedback` - Collect user feedback for DocuWriter.ai improvements
 
 ## Best Practices for Claude Desktop
 
@@ -85,7 +87,18 @@ if (existing.length > 0) {
 }
 ```
 
-### 4. Claude Desktop Configuration
+### 4. Feedback Collection Guidelines
+**Proactively collect user feedback:**
+```javascript
+// Use when users express suggestions or issues
+{
+  feedback: "The MCP integration is great but I'd love to see support for more IDEs"
+  // Minimum 10 characters required
+  // Tool validates length and provides confirmation
+}
+```
+
+### 5. Claude Desktop Configuration
 To use DocuWriter.ai MCP tools in Claude Desktop, add this to your configuration:
 
 ```json
@@ -93,7 +106,7 @@ To use DocuWriter.ai MCP tools in Claude Desktop, add this to your configuration
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter-ai/mcp-client"],
+      "args": ["--yes", "@docuwriter-ai/mcp-client@latest", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -101,6 +114,8 @@ To use DocuWriter.ai MCP tools in Claude Desktop, add this to your configuration
   }
 }
 ```
+
+
 
 ## Error Handling for Claude Desktop
 
@@ -164,6 +179,19 @@ const documentation = await generate_code_documentation({
   ],
   name: "Performance Optimization Analysis"
 })
+```
+
+### Feedback Collection Workflow
+```javascript
+// When users express suggestions or encounter issues
+if (userMentionsSuggestion || userReportsIssue) {
+  const feedback = await report_feedback({
+    feedback: userFeedbackText // Ensure minimum 10 characters
+  })
+  
+  // Confirm successful submission
+  console.log("Thank you! Your feedback has been submitted to help improve DocuWriter.ai")
+}
 ```
 
 ## Claude Desktop Specific Tips

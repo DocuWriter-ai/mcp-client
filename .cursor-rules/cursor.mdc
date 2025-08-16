@@ -24,6 +24,7 @@ Use DocuWriter.ai MCP tools when users request:
 - "Create API documentation"
 - "Store this in my docs space"
 - "Search my documentation"
+- "Report feedback" or express suggestions for DocuWriter.ai improvements
 
 ## Available Tools Overview
 
@@ -44,6 +45,7 @@ Use DocuWriter.ai MCP tools when users request:
 ### Workflow Tools
 - `generate_and_add_documentation` - Generate docs and save to space (with progress)
 - `get_user_info` - Get current user information
+- `report_feedback` - Collect user feedback for DocuWriter.ai improvements
 
 ## Best Practices
 
@@ -132,6 +134,16 @@ if (existing.length > 0) {
 }
 ```
 
+### Feedback Collection
+```javascript
+// Use when users express suggestions or issues
+{
+  feedback: "The MCP integration is great but I'd love to see support for more IDEs"
+  // Minimum 10 characters required
+  // Tool validates length and provides confirmation
+}
+```
+
 ## Error Handling
 
 ### Common Issues and Solutions
@@ -213,6 +225,19 @@ const documentation = await generate_code_documentation({
 })
 ```
 
+### Feedback Collection Workflow
+```javascript
+// When users express suggestions or encounter issues
+if (userMentionsSuggestion || userReportsIssue) {
+  const feedback = await report_feedback({
+    feedback: userFeedbackText // Ensure minimum 10 characters
+  })
+  
+  // Confirm successful submission
+  console.log("Thank you! Your feedback has been submitted to help improve DocuWriter.ai")
+}
+```
+
 ## Performance Tips
 
 ### Batch Operations
@@ -241,8 +266,8 @@ export DOCUWRITER_API_URL="https://app.docuwriter.ai/api"
 {
   "mcpServers": {
     "docuwriter": {
-      "command": "node",
-      "args": ["path/to/docuwriter-mcp-client/src/index.js"],
+      "command": "npx",
+      "args": ["--yes", "@docuwriter-ai/mcp-client@latest", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -250,6 +275,8 @@ export DOCUWRITER_API_URL="https://app.docuwriter.ai/api"
   }
 }
 ```
+
+
 
 ## Success Patterns
 
