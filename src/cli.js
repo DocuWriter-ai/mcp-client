@@ -125,7 +125,7 @@ function writeMcpConfig(environment, projectRoot) {
   // Add DocuWriter.ai MCP server configuration
   const mcpConfig = {
     command: 'npx',
-    args: ['-y', '@docuwriter-ai/mcp-client', 'start'],
+    args: ['--yes', '@docuwriter-ai/mcp-client@latest', 'start'],
     env: {
       DOCUWRITER_API_TOKEN: 'your_token_here'
     }

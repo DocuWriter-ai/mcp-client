@@ -106,9 +106,9 @@ npm link
 
 ### Automatic MCP Configuration
 
-The installer automatically writes MCP server configurations to the appropriate files for each environment. The configuration uses `npx -y` which ensures the latest version is always used:
+The installer automatically writes MCP server configurations to the appropriate files for each environment. The configuration uses `npx --yes @docuwriter-ai/mcp-client@latest` which ensures the latest version is always fetched:
 
-**Important**: The MCP configuration automatically updates to the latest version when the server starts, thanks to the `npx -y` flag. However, if you want to update the AI rules (Cursor rules, Claude guidelines), you need to re-run the install command.
+**Important**: The MCP configuration automatically updates to the latest version when the server starts, thanks to the `@latest` version specifier. However, if you want to update the AI rules (Cursor rules, Claude guidelines), you need to re-run the install command.
 
 **Cursor** (`.cursor/mcp.json`):
 ```json
@@ -116,7 +116,7 @@ The installer automatically writes MCP server configurations to the appropriate 
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter-ai/mcp-client", "start"],
+      "args": ["--yes", "@docuwriter-ai/mcp-client@latest", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -131,7 +131,7 @@ The installer automatically writes MCP server configurations to the appropriate 
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter-ai/mcp-client", "start"],
+      "args": ["--yes", "@docuwriter-ai/mcp-client@latest", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -146,7 +146,7 @@ The installer automatically writes MCP server configurations to the appropriate 
   "servers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter-ai/mcp-client", "start"],
+      "args": ["--yes", "@docuwriter-ai/mcp-client@latest", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -407,7 +407,7 @@ All DocuWriter.ai generation tools use advanced AI models to analyze and process
 ## 🔄 Updating
 
 ### MCP Server Updates
-The MCP server automatically updates to the latest version thanks to the `npx -y` flag in the configuration. No manual action required!
+The MCP server automatically updates to the latest version thanks to the `@latest` version specifier in the configuration. No manual action required!
 
 ### AI Rules Updates
 To get the latest AI assistant rules (Cursor rules, Claude guidelines), re-run the install command:
