@@ -2,7 +2,7 @@
 
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { readFileSync, existsSync, mkdirSync, copyFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -15,21 +15,27 @@ const __dirname = dirname(__filename);
 const ENVIRONMENTS = {
   cursor: {
     name: 'Cursor',
-    sourceFile: 'cursor.md',
-    targetPath: '.cursor/rules/docuwriter-mcp.md',
+    sourceFile: 'cursor.mdc',
+    targetPath: '.cursor/rules/docuwriter-mcp.mdc',
+    mcpConfigPath: '.cursor/mcp.json',
+    mcpConfigKey: 'mcpServers',
     description: 'Cursor AI assistant rules'
   },
   claude: {
     name: 'Claude Desktop',
     sourceFile: 'claude.md',
-    targetPath: '.claude/rules/docuwriter-mcp.md',
+    targetPath: 'CLAUDE.md',
+    mcpConfigPath: '.mcp.json',
+    mcpConfigKey: 'mcpServers',
     description: 'Claude Desktop AI assistant rules'
   },
   vscode: {
     name: 'Visual Studio Code',
-    sourceFile: 'vscode.md',
-    targetPath: '.vscode/ai-rules/docuwriter-mcp.md',
-    description: 'VS Code AI extension rules'
+    sourceFile: null,
+    targetPath: null,
+    mcpConfigPath: '.vscode/mcp.json',
+    mcpConfigKey: 'servers',
+    description: 'VS Code (MCP config only, no AI rules)'
   }
 };
 
@@ -91,10 +97,75 @@ function getRulesSourcePath() {
   throw new Error('Could not find DocuWriter.ai rules source directory');
 }
 
+function writeMcpConfig(environment, projectRoot) {
+  const env = ENVIRONMENTS[environment];
+  if (!env || !env.mcpConfigPath) {
+    return false;
+  }
+
+  const configPath = join(projectRoot, env.mcpConfigPath);
+  const configDir = dirname(configPath);
+
+  // Ensure directory exists
+  if (!existsSync(configDir)) {
+    mkdirSync(configDir, { recursive: true });
+  }
+
+  // Read existing config or create new one
+  let config = {};
+  if (existsSync(configPath)) {
+    try {
+      const configContent = readFileSync(configPath, 'utf8');
+      config = JSON.parse(configContent) || {};
+    } catch (error) {
+      console.log(`⚠️  Could not read existing MCP config, creating new one: ${error.message}`);
+    }
+  }
+
+  // Add DocuWriter.ai MCP server configuration
+  const mcpConfig = {
+    command: 'npx',
+    args: ['-y', '@docuwriter-ai/mcp-client', 'start'],
+    env: {
+      DOCUWRITER_API_TOKEN: 'your_token_here'
+    }
+  };
+
+  // Set the configuration using the environment's config key
+  if (!config[env.mcpConfigKey]) {
+    config[env.mcpConfigKey] = {};
+  }
+  config[env.mcpConfigKey].docuwriter = mcpConfig;
+
+  // Write the configuration file
+  try {
+    const jsonConfig = JSON.stringify(config, null, 2);
+    writeFileSync(configPath, jsonConfig, 'utf8');
+    console.log(`✅ ${env.name} MCP configuration written successfully!`);
+    console.log(`📍 Location: ${configPath.replace(projectRoot + '/', '')}`);
+    return true;
+  } catch (error) {
+    console.log(`⚠️  Failed to write MCP config for ${env.name}: ${error.message}`);
+    return false;
+  }
+}
+
 function installRule(environment, projectRoot, rulesSourcePath) {
   const env = ENVIRONMENTS[environment];
   if (!env) {
     throw new Error(`Unknown environment: ${environment}`);
+  }
+
+  // Write MCP configuration for all environments
+  const mcpSuccess = writeMcpConfig(environment, projectRoot);
+
+  // Handle VS Code (no AI rules support)
+  if (environment === 'vscode') {
+    if (mcpSuccess) {
+      console.log(`✅ ${env.name} MCP configuration installed successfully!`);
+      console.log(`📝 Remember to set your DOCUWRITER_API_TOKEN in the configuration.`);
+    }
+    return null;
   }
 
   const sourceFile = join(rulesSourcePath, env.sourceFile);
@@ -174,14 +245,18 @@ async function handleInstall(environment) {
       for (const [envKey, env] of Object.entries(ENVIRONMENTS)) {
         try {
           const installedFile = installRule(envKey, projectRoot, rulesSourcePath);
-          installedFiles.push({ env: env.name, file: installedFile });
+          if (installedFile) {
+            installedFiles.push({ env: env.name, file: installedFile });
+          }
         } catch (error) {
           console.log(`⚠️  Failed to install ${env.name} rules: ${error.message}`);
         }
       }
     } else {
       const installedFile = installRule(environment, projectRoot, rulesSourcePath);
-      installedFiles.push({ env: ENVIRONMENTS[environment].name, file: installedFile });
+      if (installedFile) {
+        installedFiles.push({ env: ENVIRONMENTS[environment].name, file: installedFile });
+      }
     }
 
     if (installedFiles.length > 0) {
@@ -206,6 +281,9 @@ async function handleInstall(environment) {
       console.log('• "Optimize this code and document the changes"\n');
 
       console.log('📚 Learn more: https://www.docuwriter.ai/docs/mcp-integration');
+    } else if (environment === 'vscode') {
+      console.log('\n✅ VS Code configuration information provided successfully!');
+      console.log('📝 Follow the instructions above to configure MCP in VS Code.');
     } else {
       console.log('❌ No rules were installed successfully.');
     }

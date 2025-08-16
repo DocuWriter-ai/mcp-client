@@ -57,10 +57,15 @@ npm link
 
 ### 🤖 **What This Installs**
 
-**Environment-Specific AI Rules:**
-- **Cursor**: Installs to `.cursor/rules/docuwriter-mcp.md` with `alwaysApply: true`
-- **Claude Desktop**: Installs to `.claude/rules/docuwriter-mcp.md`  
-- **VS Code**: Installs to `.vscode/ai-rules/docuwriter-mcp.md`
+**Environment-Specific AI Rules & MCP Configuration:**
+- **Cursor**: 
+  - AI Rules: `.cursor/rules/docuwriter-mcp.mdc` with `alwaysApply: true`
+  - MCP Config: `.cursor/mcp.json`
+- **Claude Desktop**: 
+  - AI Rules: `CLAUDE.md` (root directory)
+  - MCP Config: `.mcp.json`
+- **VS Code**: 
+  - MCP Config: `.vscode/mcp.json` (no AI rules support)
 
 **Smart AI Guidance:**
 - When and how to use DocuWriter.ai MCP tools effectively
@@ -97,8 +102,11 @@ npm link
 
 - `DOCUWRITER_API_TOKEN` (required): Your DocuWriter.ai API token
 
-### Cursor Configuration
+### Automatic MCP Configuration
 
+The installer automatically writes MCP server configurations to the appropriate files for each environment:
+
+**Cursor** (`.cursor/mcp.json`):
 ```json
 {
   "mcpServers": {
@@ -113,8 +121,7 @@ npm link
 }
 ```
 
-### Claude Desktop Configuration
-
+**Claude Desktop** (`.mcp.json`):
 ```json
 {
   "mcpServers": {
@@ -128,6 +135,23 @@ npm link
   }
 }
 ```
+
+**VS Code** (`.vscode/mcp.json`):
+```json
+{
+  "servers": {
+    "docuwriter": {
+      "command": "npx",
+      "args": ["-y", "@docuwriter-ai/mcp-client", "start"],
+      "env": {
+        "DOCUWRITER_API_TOKEN": "your_token_here"
+      }
+    }
+  }
+}
+```
+
+> **Note**: The installer preserves existing MCP configurations and adds DocuWriter.ai alongside them.
 
 ## Available Tools
 
