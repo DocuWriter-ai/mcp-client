@@ -17,9 +17,12 @@ A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Cl
 
 ## 🚀 **One-Command Setup** (Recommended)
 
-Install the MCP client AND AI assistant rules in one command:
+Install the MCP client AND AI assistant rules in one command from your project folder:
 
 ```bash
+# Navigate to your project directory first
+cd /path/to/your/project
+
 # Install for Cursor
 npx @docuwriter-ai/mcp-client install cursor
 
@@ -35,6 +38,9 @@ npx @docuwriter-ai/mcp-client install all
 # Interactive installation (prompts you to choose)
 npx @docuwriter-ai/mcp-client install
 ```
+
+> [!IMPORTANT]
+> Run these commands from your project's root directory where you want the AI rules to be installed.
 
 ### From npm
 ```bash
