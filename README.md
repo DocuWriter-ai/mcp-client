@@ -19,6 +19,8 @@ A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Cl
 
 Install the MCP client AND AI assistant rules in one command from your project folder:
 
+> **💡 Pro tip**: Run this command from your project's root directory to install the rules in the correct location.
+
 ```bash
 # Navigate to your project directory first
 cd /path/to/your/project
@@ -104,7 +106,9 @@ npm link
 
 ### Automatic MCP Configuration
 
-The installer automatically writes MCP server configurations to the appropriate files for each environment:
+The installer automatically writes MCP server configurations to the appropriate files for each environment. The configuration uses `npx -y` which ensures the latest version is always used:
+
+**Important**: The MCP configuration automatically updates to the latest version when the server starts, thanks to the `npx -y` flag. However, if you want to update the AI rules (Cursor rules, Claude guidelines), you need to re-run the install command.
 
 **Cursor** (`.cursor/mcp.json`):
 ```json
@@ -399,6 +403,20 @@ All DocuWriter.ai generation tools use advanced AI models to analyze and process
 - **Check File Size**: Large files (>1MB) may take longer to process
 - **Monitor Progress**: The MCP client will show progress updates during generation
 - **Contact Support**: If processing consistently takes >3 minutes, contact support
+
+## 🔄 Updating
+
+### MCP Server Updates
+The MCP server automatically updates to the latest version thanks to the `npx -y` flag in the configuration. No manual action required!
+
+### AI Rules Updates
+To get the latest AI assistant rules (Cursor rules, Claude guidelines), re-run the install command:
+
+```bash
+npx @docuwriter-ai/mcp-client install cursor
+```
+
+This will update the rules with the latest improvements and best practices.
 
 ## Troubleshooting
 

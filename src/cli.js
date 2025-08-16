@@ -131,6 +131,9 @@ function writeMcpConfig(environment, projectRoot) {
     }
   };
 
+  // Check if this is an update (config already exists)
+  const isUpdate = existsSync(configPath) && config[env.mcpConfigKey]?.docuwriter;
+
   // Set the configuration using the environment's config key
   if (!config[env.mcpConfigKey]) {
     config[env.mcpConfigKey] = {};
@@ -141,7 +144,13 @@ function writeMcpConfig(environment, projectRoot) {
   try {
     const jsonConfig = JSON.stringify(config, null, 2);
     writeFileSync(configPath, jsonConfig, 'utf8');
-    console.log(`✅ ${env.name} MCP configuration written successfully!`);
+
+    if (isUpdate) {
+      console.log(`✅ ${env.name} MCP configuration updated successfully!`);
+      console.log(`🔄 The configuration now uses the latest version (npx -y ensures auto-updates)`);
+    } else {
+      console.log(`✅ ${env.name} MCP configuration written successfully!`);
+    }
     console.log(`📍 Location: ${configPath.replace(projectRoot + '/', '')}`);
     return true;
   } catch (error) {

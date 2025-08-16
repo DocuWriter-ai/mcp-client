@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-01-16
+
+### Improved
+- **🔄 Update Detection**: Better feedback when updating existing MCP configurations
+- **📚 Documentation**: Clarified that MCP server auto-updates via `npx -y`, but AI rules need manual updates
+- **💡 User Guidance**: Added updating section with clear instructions for both MCP server and AI rules
+
 ## [1.2.0] - 2025-01-16
 
 ### Added
