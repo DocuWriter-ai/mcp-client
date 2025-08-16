@@ -15,6 +15,27 @@ A Model Context Protocol (MCP) client that enables AI assistants like Cursor, Cl
 
 ## Installation
 
+## 🚀 **One-Command Setup** (Recommended)
+
+Install the MCP client AND AI assistant rules in one command:
+
+```bash
+# Install for Cursor
+npx @docuwriter-ai/mcp-client install cursor
+
+# Install for Claude Desktop  
+npx @docuwriter-ai/mcp-client install claude
+
+# Install for VS Code
+npx @docuwriter-ai/mcp-client install vscode
+
+# Install for all environments
+npx @docuwriter-ai/mcp-client install all
+
+# Interactive installation (prompts you to choose)
+npx @docuwriter-ai/mcp-client install
+```
+
 ### From npm
 ```bash
 npm install -g @docuwriter-ai/mcp-client
@@ -27,6 +48,27 @@ cd mcp-client
 npm install
 npm link
 ```
+
+### 🤖 **What This Installs**
+
+**Environment-Specific AI Rules:**
+- **Cursor**: Installs to `.cursor/rules/docuwriter-mcp.md` with `alwaysApply: true`
+- **Claude Desktop**: Installs to `.claude/rules/docuwriter-mcp.md`  
+- **VS Code**: Installs to `.vscode/ai-rules/docuwriter-mcp.md`
+
+**Smart AI Guidance:**
+- When and how to use DocuWriter.ai MCP tools effectively
+- Best practices for code documentation workflows
+- Smart tool selection for different scenarios
+- Error handling and optimization strategies
+- Complete workflow examples
+
+**Benefits:**
+- 🎯 **Smarter tool usage** - AI knows which tool to use for specific tasks
+- 🔄 **Complete workflows** - AI can handle end-to-end documentation processes
+- 🛡️ **Error prevention** - Built-in best practices prevent common issues
+- 📈 **Better results** - Optimized prompts and strategies for higher quality output
+- ⚡ **Always applies** - Rules are automatically applied to all conversations
 
 ### Quick Install
 
@@ -56,7 +98,7 @@ npm link
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter-ai/mcp-client"],
+      "args": ["-y", "@docuwriter-ai/mcp-client", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }
@@ -72,7 +114,7 @@ npm link
   "mcpServers": {
     "docuwriter": {
       "command": "npx",
-      "args": ["-y", "@docuwriter-ai/mcp-client"],
+      "args": ["-y", "@docuwriter-ai/mcp-client", "start"],
       "env": {
         "DOCUWRITER_API_TOKEN": "your_token_here"
       }

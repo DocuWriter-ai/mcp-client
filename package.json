@@ -3,12 +3,13 @@
   "version": "1.0.4",
   "description": "MCP client for DocuWriter.ai - enables AI assistants to generate documentation and search documentation spaces",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/cli.js",
   "bin": {
-    "docuwriter-ai-mcp": "src/index.js"
+    "docuwriter-ai-mcp": "src/cli.js"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/cli.js start",
+    "install": "node src/cli.js install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
